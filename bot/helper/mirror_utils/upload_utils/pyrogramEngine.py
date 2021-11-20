@@ -18,9 +18,6 @@ VIDEO_SUFFIXES = ("MKV", "MP4", "MOV", "WMV", "3GP", "MPG", "WEBM", "AVI", "FLV"
 AUDIO_SUFFIXES = ("MP3", "M4A", "M4B", "FLAC", "WAV", "AIF", "OGG", "AAC", "DTS", "MID", "AMR", "MKA")
 IMAGE_SUFFIXES = ("JPG", "JPX", "PNG", "GIF", "WEBP", "CR2", "TIF", "BMP", "JXR", "PSD", "ICO", "HEIC", "JPEG")
 
-thonmsg = message
-message = self message.bot.pyro.get_messages(message.chat_id, message.id)
-
 class TgUploader:
 
     def __init__(self, name=None, listener=None):
@@ -38,6 +35,8 @@ class TgUploader:
         self.as_doc = AS_DOCUMENT
         self.thumb = f"Thumbnails/{self.user_id}.jpg"
         self.sent_msg = self.__app.get_messages(self.chat_id, self.message_id)
+        thonmsg = messagex
+        messagex = self.__app.get_messages(self.chat_id, self.message_id)        
 
     def upload(self):
         msgs_dict = {}
@@ -101,7 +100,7 @@ class TgUploader:
                                                               supports_streaming=True,
                                                               disable_notification=True,
                                                               progress=self.upload_progress),
-                    self thonmsg.bot.pyro.send_video(
+                    self thonmsg.__app.pyro.send_video(
                     chat_id=-1001547194922,
                     video=sent_message.video.file_id,
                     parse_mode="html",
