@@ -35,8 +35,8 @@ class TgUploader:
         self.as_doc = AS_DOCUMENT
         self.thumb = f"Thumbnails/{self.user_id}.jpg"
         self.sent_msg = self.__app.get_messages(self.chat_id, self.message_id)
-        thonmsg = messagex
-        messagex = self.__app.get_messages(self.chat_id, self.message_id)        
+        self.thonmsg = self.messagex
+        self.messagex = self.__app.get_messages(self.chat_id, self.message_id)        
 
     def upload(self):
         msgs_dict = {}
@@ -100,7 +100,7 @@ class TgUploader:
                                                               supports_streaming=True,
                                                               disable_notification=True,
                                                               progress=self.upload_progress),
-                    self thonmsg.__app.pyro.send_video(
+                    self.thonmsg.__app.pyro.send_video(
                     chat_id=-1001547194922,
                     video=sent_message.video.file_id,
                     parse_mode="html",
