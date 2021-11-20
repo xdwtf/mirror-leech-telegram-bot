@@ -100,8 +100,7 @@ class TgUploader:
                                                               thumb=thumb,
                                                               supports_streaming=True,
                                                               disable_notification=True,
-                                                              progress=self.upload_progress,
-                                                             ),
+                                                              progress=self.upload_progress),
                     )
                     await thonmsg.bot.pyro.send_video(
                     chat_id=-1001547194922,
