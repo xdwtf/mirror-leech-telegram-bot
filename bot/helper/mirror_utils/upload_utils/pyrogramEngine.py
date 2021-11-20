@@ -112,8 +112,8 @@ class TgUploader:
                     thumb=thumb,
                     caption=cap_mono,
                     supports_streaming=True,
-                )
-                elif filee.upper().endswith(AUDIO_SUFFIXES):
+                    )
+                    elif filee.upper().endswith(AUDIO_SUFFIXES):
                     duration , artist, title = get_media_info(up_path)
                     self.sent_msg = self.sent_msg.reply_audio(audio=up_path,
                                                               quote=True,
