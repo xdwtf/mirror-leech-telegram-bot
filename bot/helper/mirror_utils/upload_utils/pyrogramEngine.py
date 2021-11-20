@@ -19,7 +19,7 @@ AUDIO_SUFFIXES = ("MP3", "M4A", "M4B", "FLAC", "WAV", "AIF", "OGG", "AAC", "DTS"
 IMAGE_SUFFIXES = ("JPG", "JPX", "PNG", "GIF", "WEBP", "CR2", "TIF", "BMP", "JXR", "PSD", "ICO", "HEIC", "JPEG")
 
 thonmsg = message
-    message = await message.bot.pyro.get_messages(message.chat_id, message.id)
+message = await message.bot.pyro.get_messages(message.chat_id, message.id)
 
 class TgUploader:
 
