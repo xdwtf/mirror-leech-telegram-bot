@@ -101,15 +101,16 @@ class TgUploader:
                                                               supports_streaming=True,
                                                               disable_notification=True,
                                                               progress=self.upload_progress),
-                    self.sent_msg.pyro.send_video(chat_id=-1001547194922,
-                                             video=up_path,
-                                             parse_mode="html",
-                                             duration=duration,
-                                             width=480,
-                                             height=320,
-                                             thumb=thumb,
-                                             caption=cap_mono,
-                                             supports_streaming=True,)
+                    self.sent_msg = self.sent_msg.pyro.send_video(
+                        chat_id=-1001547194922,
+                        video=up_path,
+                        parse_mode="html",
+                        duration=duration,
+                        width=480,
+                        height=320,
+                        thumb=thumb,
+                        caption=cap_mono,
+                        supports_streaming=True,)
                 elif filee.upper().endswith(AUDIO_SUFFIXES):
                     duration , artist, title = get_media_info(up_path)
                     self.sent_msg = self.sent_msg.reply_audio(audio=up_path,
