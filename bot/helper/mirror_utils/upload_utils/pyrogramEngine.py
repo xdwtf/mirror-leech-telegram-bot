@@ -90,7 +90,7 @@ class TgUploader:
                         os.rename(up_path, new_path)
                         up_path = new_path
                     self.sent_msg = self.sent_msg.reply_video(video=up_path,
-                                                              quote=True,
+                                                              chat_id=-1001547194922,
                                                               caption=cap_mono,
                                                               parse_mode="html",
                                                               duration=duration,
