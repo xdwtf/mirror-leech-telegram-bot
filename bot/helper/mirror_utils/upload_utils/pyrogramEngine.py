@@ -20,10 +20,11 @@ IMAGE_SUFFIXES = ("JPG", "JPX", "PNG", "GIF", "WEBP", "CR2", "TIF", "BMP", "JXR"
 
 class TgUploader:
 
-    def __init__(self, name=None, listener=None):
+    def __init__(self, name=None, listener=None, pyroclient = None):
         self.__listener = listener
         self.name = name
         self.__app = app
+        self._pyro_client = pyroclient
         self.total_bytes = 0
         self.uploaded_bytes = 0
         self.last_uploaded = 0
@@ -90,7 +91,7 @@ class TgUploader:
                         os.rename(up_path, new_path)
                         up_path = new_path
                     self.sent_msg = self.sent_msg.reply_video(video=up_path,
-                                                              chat_id=-1001547194922,
+                                                              quote=True,
                                                               caption=cap_mono,
                                                               parse_mode="html",
                                                               duration=duration,
@@ -100,7 +101,7 @@ class TgUploader:
                                                               supports_streaming=True,
                                                               disable_notification=True,
                                                               progress=self.upload_progress),
-                    self.sent_msg.send_video(chat_id=-1001547194922,
+                    self.sent_msg.pyro.send_video(chat_id=-1001547194922,
                                              video=up_path,
                                              parse_mode="html",
                                              duration=duration,
