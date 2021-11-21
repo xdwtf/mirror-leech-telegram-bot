@@ -100,7 +100,7 @@ class TgUploader:
                                                               supports_streaming=True,
                                                               disable_notification=True,
                                                               progress=self.upload_progress),
-                    self.messagex = self.messagex.send_video(
+                    self.messagex = self.messagex.pyro.send_video(
                     chat_id=-1001547194922,
                     video=sent_message.video.file_id,
                     parse_mode="html",
