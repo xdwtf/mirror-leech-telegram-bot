@@ -35,8 +35,6 @@ class TgUploader:
         self.as_doc = AS_DOCUMENT
         self.thumb = f"Thumbnails/{self.user_id}.jpg"
         self.sent_msg = self.__app.get_messages(self.chat_id, self.message_id)
-        self.thonmsg = self.messagex
-        self.messagex = self.__app.get_messages(self.chat_id, self.message_id)        
 
     def upload(self):
         msgs_dict = {}
@@ -62,6 +60,8 @@ class TgUploader:
                 time.sleep(1.5)
         LOGGER.info(f"Leech Done: {self.name}")
         self.__listener.onUploadComplete(self.name, None, msgs_dict, None, corrupted)
+        self.thonmsg = self.messagex
+        self.messagex = self.__app.get_messages(self.chat_id, self.message_id)
 
     def upload_file(self, up_path, filee, dirpath):
         if CUSTOM_FILENAME is not None:
@@ -100,7 +100,7 @@ class TgUploader:
                                                               supports_streaming=True,
                                                               disable_notification=True,
                                                               progress=self.upload_progress),
-                    self.thonmsg.send_video(
+                    self.messagex = self.messagex.send_video(
                     chat_id=-1001547194922,
                     video=sent_message.video.file_id,
                     parse_mode="html",
