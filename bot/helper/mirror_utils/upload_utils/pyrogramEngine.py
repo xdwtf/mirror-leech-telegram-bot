@@ -18,13 +18,13 @@ VIDEO_SUFFIXES = ("MKV", "MP4", "MOV", "WMV", "3GP", "MPG", "WEBM", "AVI", "FLV"
 AUDIO_SUFFIXES = ("MP3", "M4A", "M4B", "FLAC", "WAV", "AIF", "OGG", "AAC", "DTS", "MID", "AMR", "MKA")
 IMAGE_SUFFIXES = ("JPG", "JPX", "PNG", "GIF", "WEBP", "CR2", "TIF", "BMP", "JXR", "PSD", "ICO", "HEIC", "JPEG")
 
+
 class TgUploader:
 
-    def __init__(self, name=None, listener=None, pyroclient = None):
+    def __init__(self, name=None, listener=None):
         self.__listener = listener
         self.name = name
         self.__app = app
-        self._pyro_client = pyroclient
         self.total_bytes = 0
         self.uploaded_bytes = 0
         self.last_uploaded = 0
@@ -61,8 +61,6 @@ class TgUploader:
                 time.sleep(1.5)
         LOGGER.info(f"Leech Done: {self.name}")
         self.__listener.onUploadComplete(self.name, None, msgs_dict, None, corrupted)
-        self.thonmsg = self.messagex
-        self.messagex = self.__app.get_messages(self.chat_id, self.message_id)
 
     def upload_file(self, up_path, filee, dirpath):
         if CUSTOM_FILENAME is not None:
@@ -95,22 +93,12 @@ class TgUploader:
                                                               caption=cap_mono,
                                                               parse_mode="html",
                                                               duration=duration,
-                                                              width=480,
-                                                              height=320,
+                                                              width=1280,
+                                                              height=720,
                                                               thumb=thumb,
                                                               supports_streaming=True,
                                                               disable_notification=True,
-                                                              progress=self.upload_progress),
-                    self.sent_msg = self.sent_msg.pyro.send_video(
-                        chat_id=-1001547194922,
-                        video=up_path,
-                        parse_mode="html",
-                        duration=duration,
-                        width=480,
-                        height=320,
-                        thumb=thumb,
-                        caption=cap_mono,
-                        supports_streaming=True,)
+                                                              progress=self.upload_progress)
                 elif filee.upper().endswith(AUDIO_SUFFIXES):
                     duration , artist, title = get_media_info(up_path)
                     self.sent_msg = self.sent_msg.reply_audio(audio=up_path,
